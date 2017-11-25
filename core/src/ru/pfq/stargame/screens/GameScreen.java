@@ -5,6 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -65,7 +66,8 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
         this.textureAtlasGame = new TextureAtlas("mainAtlas.tpack");
         this.explosionPool = new ExplosionPool(textureAtlasGame);
         this.bulletPool= new BulletPool();
-        this.font = new BitmapFont();
+        this.font = new BitmapFont(Gdx.files.internal("font.fnt"));
+        font.setColor(Color.WHITE);
     }
 
     @Override
@@ -165,7 +167,7 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
         warShipsPool.drawActiveObjects(batch);
         bulletPool.drawActiveObjects(batch);
         explosionPool.drawActiveObjects(batch);
-        font.draw(batch, str, 0.0f, 0.0f);
+        font.draw(batch, "Hello World", 0.4f, 0.4f);
         btnBack.draw(batch);
         if (state == State.GAME_OVER) {
             messageGameOver.draw(batch);
