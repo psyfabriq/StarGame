@@ -1,0 +1,120 @@
+
+gameAtlas.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+explosion
+  rotate: false
+  xy: 1, 106
+  size: 914, 907
+  orig: 914, 907
+  offset: 0, 0
+  index: -1
+Engine_exhaust2_frames
+  rotate: false
+  xy: 1, 1
+  size: 145, 103
+  orig: 145, 103
+  offset: 0, 0
+  index: -1
+Engine_exhaust_frames
+  rotate: false
+  xy: 148, 53
+  size: 153, 51
+  orig: 153, 51
+  offset: 0, 0
+  index: -1
+main_bullet
+  rotate: false
+  xy: 917, 985
+  size: 18, 28
+  orig: 18, 28
+  offset: 0, 0
+  index: -1
+alient_bullet
+  rotate: false
+  xy: 148, 23
+  size: 18, 28
+  orig: 18, 28
+  offset: 0, 0
+  index: -1
+
+gameAtlas2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Alien-Mothership
+  rotate: false
+  xy: 1, 509
+  size: 706, 512
+  orig: 706, 512
+  offset: 0, 0
+  index: -1
+Alien-Battleship
+  rotate: false
+  xy: 1, 251
+  size: 386, 256
+  orig: 386, 256
+  offset: 0, 0
+  index: -1
+MainShip-3
+  rotate: false
+  xy: 1, 1
+  size: 364, 248
+  orig: 364, 248
+  offset: 0, 0
+  index: -1
+Alien-HeavyCruiser
+  rotate: false
+  xy: 389, 251
+  size: 343, 256
+  orig: 343, 256
+  offset: 0, 0
+  index: -1
+Alien-Battlecruiser
+  rotate: false
+  xy: 709, 765
+  size: 312, 256
+  orig: 312, 256
+  offset: 0, 0
+  index: -1
+MainShip-2
+  rotate: false
+  xy: 367, 50
+  size: 268, 199
+  orig: 268, 199
+  offset: 0, 0
+  index: -1
+MainShip-1
+  rotate: false
+  xy: 709, 628
+  size: 248, 135
+  orig: 248, 135
+  offset: 0, 0
+  index: -1
+Alien-Destroyer
+  rotate: false
+  xy: 734, 370
+  size: 244, 256
+  orig: 244, 256
+  offset: 0, 0
+  index: -1
+Alien-Scout
+  rotate: false
+  xy: 734, 240
+  size: 174, 128
+  orig: 174, 128
+  offset: 0, 0
+  index: -1
+
+gameAtlas3.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Alien-Cruiser
+  rotate: false
+  xy: 1, 1
+  size: 324, 256
+  orig: 324, 256
+  offset: 0, 0
+  index: -1
