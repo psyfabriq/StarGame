@@ -48,13 +48,19 @@ public class MainShip extends Ship  {
         super(atlas.findRegion("main_ship"),1,2,2,bulletPool,explosionPool,worldBounds);
         setHeightProportion(SHIP_HEIGHT);
         this.bulletRegion = atlas.findRegion("bulletMainShip");
-        this.bulletHeight = 0.01f;
-        this.bulletV.set(0,0.5f);
-        this.bulletDamage = 1;
-        this.reloadInterval = 0.2f;
         super.bulletSound = bulletSound;
         super.bulletSound.setVolume(1,0.05f);
-        this.hp = 100;
+        setToNewGame();
+    }
+
+    public void setToNewGame() {
+        pos.x = worldBounds.pos.x;
+        this.bulletHeight = 0.01f;
+        this.bulletV.set(0, 0.5f);
+        this.bulletDamage = 1;
+        this.reloadInterval = 0.2f;
+        hp = 100;
+        flushDestroy();
     }
 
     @Override
@@ -184,6 +190,14 @@ public class MainShip extends Ship  {
     private void moveLeft(){
         if(worldBounds.getLeft()<getLeft()-CORRECT_ANGLE  && k==LEFT) {
             v.set(v0).rotate(180);
+        }
+    }
+
+    @Override
+    public void setHP(int hp) {
+        super.setHP(hp);
+        if(this.hp <= 0){
+            destroy();
         }
     }
 

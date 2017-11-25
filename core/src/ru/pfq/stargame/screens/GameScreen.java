@@ -40,8 +40,14 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
     private Sound soundBallet;
     private Sound soundExplosion;
     private BitmapFont font;
+    private int frags;
+
 
     private MessageGameOver messageGameOver;
+
+    private enum State { PLAYING, GAME_OVER }
+
+    private State state;
 
     CharSequence str = "Hello World!";
 
@@ -83,6 +89,7 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
         this.warShipsPool  = new WarShipsPool(textureAtlasGame,mainShip,soundBallet);
         music.play();
         this.messageGameOver = new MessageGameOver(textureAtlasGame);
+        startNewGame();
 
     }
 
@@ -105,14 +112,24 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
 
     public void update(float delta){
 
-        this.warShipsPool.proccessWarShips(delta);
-
         backgroundObj.update(delta);
-        bulletPool.updateActiveSprites(delta);
-        mainShip.update(delta);
-        explosionPool.updateActiveSprites(delta);
-        warShipsPool.updateActiveSprites(delta);
-        warShipsPool.colisionBetween(delta);
+        switch (state) {
+            case PLAYING:
+                if (mainShip.isDestroyed()) {
+                    state = State.GAME_OVER;
+                }
+                this.warShipsPool.proccessWarShips(delta);
+                this.bulletPool.updateActiveSprites(delta);
+                this.mainShip.update(delta);
+                this.warShipsPool.updateActiveSprites(delta);
+                this.warShipsPool.colisionBetween(delta);
+                break;
+            case GAME_OVER:
+                break;
+        }
+
+        this.explosionPool.updateActiveSprites(delta);
+
 
 
     }
@@ -122,6 +139,7 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
             this.bulletPool.set(ship);
         }
         warShipsPool.checkCollisions();
+
     }
 
     public void deleteAllDestoyed(){
@@ -142,7 +160,9 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
         explosionPool.drawActiveObjects(batch);
         font.draw(batch, str, 0.0f, 0.0f);
         btnBack.draw(batch);
-        messageGameOver.draw(batch);
+        if (state == State.GAME_OVER) {
+            messageGameOver.draw(batch);
+        }
         batch.end();
     }
 
@@ -182,6 +202,8 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
         }
     }
 
+
+
     @Override
     public boolean keyDown(int keycode) {
         return mainShip.keyDown(keycode);
@@ -190,6 +212,16 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
     @Override
     public boolean keyUp(int keycode) {
         return mainShip.keyUp(keycode);
+    }
+
+    private void startNewGame() {
+        state = State.PLAYING;
+        frags = 0;
+
+        mainShip.setToNewGame();
+        bulletPool.freeAllActiveObjects();
+        warShipsPool.freeAllActiveObjects();
+        explosionPool.freeAllActiveObjects();
     }
 
 }
