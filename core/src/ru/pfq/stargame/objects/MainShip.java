@@ -193,13 +193,7 @@ public class MainShip extends Ship  {
         }
     }
 
-    @Override
-    public void setHP(int hp) {
-        super.setHP(hp);
-        if(this.hp <= 0){
-            destroy();
-        }
-    }
+
 
     private void stop(){
         v.setZero();

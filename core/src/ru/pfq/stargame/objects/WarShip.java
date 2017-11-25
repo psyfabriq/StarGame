@@ -99,7 +99,7 @@ public class WarShip extends Ship {
     }
 
     private void check_shoot(float deltaTime){
-        if(Sprite.checkCollision(mainShip,this,Sprite.COLISION_ONLY_X)){
+        if(Sprite.checkCollision(mainShip,this,Sprite.COLISION_ONLY_X) && !mainShip.isDestroyed()){
             reloadTimer += deltaTime;
             if(reloadTimer>= reloadInterval){
                 shoot();
@@ -128,15 +128,6 @@ public class WarShip extends Ship {
         super.destroy();
     }
 
-    @Override
-    public void setHP(int hp) {
-        super.setHP(hp);
-        if(this.hp == 0){
-            destroy();
-            Explosion expo =  explosionPool.obtain();
-            expo.set(0.1f,pos);
-        }
-    }
 
     public void setTrakingV(Vector2 trakingV) {
         this.trakingV = trakingV;

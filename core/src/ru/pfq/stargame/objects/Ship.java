@@ -97,11 +97,12 @@ public class Ship extends Sprite {
     }
 
     public void setHP(int hp){
-        if(this.hp<=0){
+        if(this.hp<=0 && !this.isDestroyed){
             System.out.println("Game Over");
             Explosion expo =  explosionPool.obtain();
             expo.set(0.1f,pos);
-        }else{
+            this.destroy();
+        }else if(!this.isDestroyed){
                 this.hp -= hp;
                 System.out.println(this.hp);
                 frame = 1;

@@ -118,15 +118,17 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
                 if (mainShip.isDestroyed()) {
                     state = State.GAME_OVER;
                 }
-                this.warShipsPool.proccessWarShips(delta);
-                this.bulletPool.updateActiveSprites(delta);
                 this.mainShip.update(delta);
-                this.warShipsPool.updateActiveSprites(delta);
-                this.warShipsPool.colisionBetween(delta);
                 break;
             case GAME_OVER:
                 break;
         }
+
+        this.warShipsPool.proccessWarShips(delta);
+        this.bulletPool.updateActiveSprites(delta);
+
+        this.warShipsPool.updateActiveSprites(delta);
+        this.warShipsPool.colisionBetween(delta);
 
         this.explosionPool.updateActiveSprites(delta);
 
