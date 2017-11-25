@@ -44,6 +44,8 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
 
 
     private MessageGameOver messageGameOver;
+    private MessageNewGame  messageNewGame;
+    private Button btnNewGame;
 
     private enum State { PLAYING, GAME_OVER }
 
@@ -89,6 +91,7 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
         this.warShipsPool  = new WarShipsPool(textureAtlasGame,mainShip,soundBallet);
         music.play();
         this.messageGameOver = new MessageGameOver(textureAtlasGame);
+        this.messageNewGame  = new MessageNewGame(textureAtlasGame,this);
         startNewGame();
 
     }
@@ -108,6 +111,8 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
         mainShip.resize(worldBounds);
         warShipsPool.resizeActiveSprites(worldBounds);
         btnBack.resize(worldBounds);
+        messageNewGame.resize(worldBounds);
+
     }
 
     public void update(float delta){
@@ -164,6 +169,7 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
         btnBack.draw(batch);
         if (state == State.GAME_OVER) {
             messageGameOver.draw(batch);
+            messageNewGame.draw(batch);
         }
         batch.end();
     }
@@ -184,6 +190,7 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
 
         btnBack.touchDown(touch,pointer);
         mainShip.touchDown(touch,pointer);
+        messageNewGame.touchDown(touch,pointer);
 
 
     }
@@ -193,12 +200,16 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
 
         btnBack.touchUp(touch,pointer);
         mainShip.touchUp(touch,pointer);
+        messageNewGame.touchUp(touch,pointer);
     }
 
     @Override
     public void actionPerformed(Object src) {
+        System.out.println(src);
         if(src == btnBack){
             game.setScreen(new MenuScreen(game));
+        }else if(src == messageNewGame){
+            startNewGame();
         }else{
             throw new RuntimeException("Unknown src = " + src);
         }
@@ -217,9 +228,9 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
     }
 
     private void startNewGame() {
+        System.out.println("startNewGame");
         state = State.PLAYING;
         frags = 0;
-
         mainShip.setToNewGame();
         bulletPool.freeAllActiveObjects();
         warShipsPool.freeAllActiveObjects();

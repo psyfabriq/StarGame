@@ -14,6 +14,5 @@ public class MessageGameOver extends Sprite {
         super(atlas.findRegion("message_game_over"));
         setWithProportion(WIDTH);
         setBottom(BOTTOM_MARGIN);
-
     }
 }
