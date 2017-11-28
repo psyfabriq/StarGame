@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import ru.pfq.stargame.engine.math.Rect;
 import ru.pfq.stargame.engine.math.Rnd;
 import ru.pfq.stargame.engine.utils.Regions;
-import ru.pfq.stargame.objects.WarShip;
+import ru.pfq.stargame.objects.AlientShip;
 
 public class EnemyEmitter {
 
@@ -50,10 +50,10 @@ public class EnemyEmitter {
 
     private final TextureRegion bulletRegion;
 
-    private final WarShipsPool enemyPool;
+    private final AlientShipsPool enemyPool;
 
 
-    public EnemyEmitter(WarShipsPool enemyPool, Rect worlBounds, TextureAtlas atlas, Sound bulletSound) {
+    public EnemyEmitter(AlientShipsPool enemyPool, Rect worlBounds, TextureAtlas atlas, Sound bulletSound) {
         this.enemyPool   = enemyPool;
         this.worlBounds  = worlBounds;
         this.bulletSound = bulletSound;
@@ -77,7 +77,7 @@ public class EnemyEmitter {
             float type = (float) Math.random();
 
             if(type<0.7f){
-                WarShip enemy = enemyPool.obtain();
+                AlientShip enemy = enemyPool.obtain();
                 enemyV.set(Rnd.nextFloat(-0.09f, 0.09f), Rnd.nextFloat(-0.1f, -0.3f));
                 enemy.set(enemySmallRegion,
                         enemyV,bulletRegion,
@@ -91,7 +91,7 @@ public class EnemyEmitter {
                         false);
 
             }else if(type<0.9f){
-                WarShip enemy = enemyPool.obtain();
+                AlientShip enemy = enemyPool.obtain();
                 enemyV.set(Rnd.nextFloat(-0.09f, 0.09f), Rnd.nextFloat(-0.04f, -0.08f));
                 enemy.set(enemyMediumRegion,
                         enemyV,bulletRegion,
@@ -104,7 +104,7 @@ public class EnemyEmitter {
                         ENEMY_MEDIUM_HP,
                         false);
             }else if(!enemyPool.hasBossOnTheScreen){
-                WarShip enemy = enemyPool.obtain();
+                AlientShip enemy = enemyPool.obtain();
                 enemyPool.hasBossOnTheScreen = true;
                 enemyV.set(Rnd.nextFloat(-0.04f, 0.04f), Rnd.nextFloat(-0.002f, -0.01f));
                 enemy.set(enemyBigRegion,

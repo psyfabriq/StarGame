@@ -14,18 +14,14 @@ import com.badlogic.gdx.math.Vector2;
 
 import ru.pfq.stargame.actions.ButtonActionListener;
 import ru.pfq.stargame.engine.Base2DScreen;
-import ru.pfq.stargame.engine.Sprite2DTexture;
 import ru.pfq.stargame.engine.math.Rect;
-import ru.pfq.stargame.objects.Background;
 import ru.pfq.stargame.objects.BackgroundForAllScreens;
 import ru.pfq.stargame.objects.Button;
-import ru.pfq.stargame.objects.Explosion;
 import ru.pfq.stargame.objects.MainShip;
 import ru.pfq.stargame.objects.Ship;
-import ru.pfq.stargame.objects.WarShip;
 import ru.pfq.stargame.pools.BulletPool;
 import ru.pfq.stargame.pools.ExplosionPool;
-import ru.pfq.stargame.pools.WarShipsPool;
+import ru.pfq.stargame.pools.AlientShipsPool;
 
 public class GameScreen extends Base2DScreen implements ButtonActionListener {
 
@@ -40,24 +36,22 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
     private Sound soundLaser;
     private Sound soundBallet;
     private Sound soundExplosion;
-    private BitmapFont font;
     private int frags;
 
 
     private MessageGameOver messageGameOver;
-    private MessageNewGame  messageNewGame;
+    private ButtonNewGame buttonNewGame;
     private Button btnNewGame;
 
     private enum State { PLAYING, GAME_OVER }
 
     private State state;
 
-    CharSequence str = "Hello World!";
 
 
     private  final BulletPool bulletPool;
     private  ExplosionPool explosionPool;
-    private  WarShipsPool  warShipsPool;
+    private AlientShipsPool alientShipsPool;
 
 
     public GameScreen(Game game) {
@@ -66,8 +60,6 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
         this.textureAtlasGame = new TextureAtlas("mainAtlas.tpack");
         this.explosionPool = new ExplosionPool(textureAtlasGame);
         this.bulletPool= new BulletPool();
-        this.font = new BitmapFont(Gdx.files.internal("font.fnt"));
-        font.setColor(Color.WHITE);
     }
 
     @Override
@@ -90,10 +82,10 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
         this.btnBack = new Button(regionBack,-0.4f,0.4f,0.15f,this);
         mainShip = new MainShip(textureAtlasGame,bulletPool,explosionPool,worldBounds,soundLaser);
         backgroundObj.setTrakingV(mainShip.getV());
-        this.warShipsPool  = new WarShipsPool(textureAtlasGame,mainShip,soundBallet);
+        this.alientShipsPool = new AlientShipsPool(textureAtlasGame,mainShip,soundBallet);
         music.play();
         this.messageGameOver = new MessageGameOver(textureAtlasGame);
-        this.messageNewGame  = new MessageNewGame(textureAtlasGame,this);
+        this.buttonNewGame = new ButtonNewGame(textureAtlasGame,this);
         startNewGame();
 
     }
@@ -111,9 +103,9 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
     protected void resize(Rect worldBounds) {
         backgroundObj.resize(worldBounds);
         mainShip.resize(worldBounds);
-        warShipsPool.resizeActiveSprites(worldBounds);
+        alientShipsPool.resizeActiveSprites(worldBounds);
         btnBack.resize(worldBounds);
-        messageNewGame.resize(worldBounds);
+        buttonNewGame.resize(worldBounds);
 
     }
 
@@ -131,11 +123,11 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
                 break;
         }
 
-        this.warShipsPool.proccessWarShips(delta);
+        this.alientShipsPool.proccessWarShips(delta);
         this.bulletPool.updateActiveSprites(delta);
 
-        this.warShipsPool.updateActiveSprites(delta);
-        this.warShipsPool.colisionBetween(delta);
+        this.alientShipsPool.updateActiveSprites(delta);
+        this.alientShipsPool.colisionBetween(delta);
 
         this.explosionPool.updateActiveSprites(delta);
 
@@ -144,10 +136,10 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
     }
 
     public void checkCollisions(){
-        for (Ship ship: warShipsPool.getActiveShips()) {
+        for (Ship ship: alientShipsPool.getActiveShips()) {
             this.bulletPool.set(ship);
         }
-        warShipsPool.checkCollisions();
+        alientShipsPool.checkCollisions();
 
     }
 
@@ -155,7 +147,7 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
 
         bulletPool.freeAllDestroyedActiveObjects();
         explosionPool.freeAllDestroyedActiveObjects();
-        warShipsPool.freeAllDestroyedActiveObjects();
+        alientShipsPool.freeAllDestroyedActiveObjects();
     }
 
     public void draw(){
@@ -164,14 +156,13 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
         batch.begin();
         backgroundObj.draw(batch);
         mainShip.draw(batch);
-        warShipsPool.drawActiveObjects(batch);
+        alientShipsPool.drawActiveObjects(batch);
         bulletPool.drawActiveObjects(batch);
         explosionPool.drawActiveObjects(batch);
-        font.draw(batch, "Hello World", 0.4f, 0.4f);
         btnBack.draw(batch);
         if (state == State.GAME_OVER) {
             messageGameOver.draw(batch);
-            messageNewGame.draw(batch);
+            buttonNewGame.draw(batch);
         }
         batch.end();
     }
@@ -182,7 +173,7 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
         textureAtlasGame.dispose();
         bulletPool.dispose();
         explosionPool.dispose();
-        warShipsPool.dispose();
+        alientShipsPool.dispose();
         music.dispose();
         super.dispose();
     }
@@ -192,7 +183,7 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
 
         btnBack.touchDown(touch,pointer);
         mainShip.touchDown(touch,pointer);
-        messageNewGame.touchDown(touch,pointer);
+        buttonNewGame.touchDown(touch,pointer);
 
 
     }
@@ -202,7 +193,7 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
 
         btnBack.touchUp(touch,pointer);
         mainShip.touchUp(touch,pointer);
-        messageNewGame.touchUp(touch,pointer);
+        buttonNewGame.touchUp(touch,pointer);
     }
 
     @Override
@@ -210,7 +201,7 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
         System.out.println(src);
         if(src == btnBack){
             game.setScreen(new MenuScreen(game));
-        }else if(src == messageNewGame){
+        }else if(src == buttonNewGame){
             startNewGame();
         }else{
             throw new RuntimeException("Unknown src = " + src);
@@ -235,7 +226,7 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
         frags = 0;
         mainShip.setToNewGame();
         bulletPool.freeAllActiveObjects();
-        warShipsPool.freeAllActiveObjects();
+        alientShipsPool.freeAllActiveObjects();
         explosionPool.freeAllActiveObjects();
     }
 
