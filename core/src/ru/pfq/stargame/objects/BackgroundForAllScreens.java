@@ -12,6 +12,7 @@ import java.util.List;
 import ru.pfq.stargame.engine.Sprite2DTexture;
 import ru.pfq.stargame.engine.math.Rect;
 import ru.pfq.stargame.engine.math.Rnd;
+import ru.pfq.stargame.engine.utils.Regions;
 
 public class BackgroundForAllScreens {
     private static BackgroundForAllScreens instance;
@@ -49,12 +50,8 @@ public class BackgroundForAllScreens {
         return textureAtlas;
     }
 
-    public void setAtlasRegions(String... regions){
-        regionStar = new TextureRegion[regions.length];
-        for (int i = 0; i<regions.length;i++) {
-            regionStar[i]=textureAtlas.findRegion(regions[i]);
-        }
-
+    public void setAtlasRegions(String region){
+        regionStar = Regions.split(textureAtlas.findRegion(region),2,2,4);
     }
     public void initStars(){
         for(int i = 0;i<STAR_COUNT;i++) {

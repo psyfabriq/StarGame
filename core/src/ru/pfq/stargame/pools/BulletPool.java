@@ -59,6 +59,12 @@ public class BulletPool extends SpritesPool<Bullet> {
                     if(sprite.frame == 0){
                         activeObjects.get(i).setShip(sprite);
                         sprite.setHP(activeObjects.get(i).getDamage());
+                        if(sprite.isDestroyed()){
+                            //listShips.remove(sprite);
+                            System.out.println(
+                                    "dgdfgdfgdfgdfgdfgdfg"
+                            );
+                        }
                     }
                     activeObjects.get(i).destroy();
                 }

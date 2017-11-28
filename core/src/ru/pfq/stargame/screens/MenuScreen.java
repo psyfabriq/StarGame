@@ -36,13 +36,13 @@ public class MenuScreen extends Base2DScreen implements ButtonActionListener {
 
         TextureRegion[] regionPlay = new TextureRegion[2];
         TextureRegion[] regionExit = new TextureRegion[2];
-        regionPlay[0] = textureAtlas.findRegion("menuPlay");
-        regionPlay[1] = textureAtlas.findRegion("menuPlay_press");
-        regionExit[0] = textureAtlas.findRegion("menuExit");
-        regionExit[1] = textureAtlas.findRegion("menuExit_press");
+        regionPlay[0] = textureAtlas.findRegion("play");
+        regionPlay[1] = textureAtlas.findRegion("play_press");
+        regionExit[0] = textureAtlas.findRegion("cancel");
+        regionExit[1] = textureAtlas.findRegion("cancel_press");
 
-        btnPlay = new Button(regionPlay,-0.4f,-0.34f,0.15f,this);
-        btnExit = new Button(regionExit,0.4f,-0.34f,0.15f,this);
+        btnPlay = new Button(regionPlay,-0.4f,-0.34f,0.08f,this);
+        btnExit = new Button(regionExit,0.4f,-0.34f,0.08f,this);
     }
 
     @Override

@@ -77,9 +77,9 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
 
         this.textureAtlas = backgroundObj.getTextureAtlas();
         TextureRegion[] regionBack = new TextureRegion[2];
-        regionBack[0] = textureAtlas.findRegion("menuExit");
-        regionBack[1] = textureAtlas.findRegion("menuExit_press");
-        this.btnBack = new Button(regionBack,-0.4f,0.4f,0.15f,this);
+        regionBack[0] = textureAtlas.findRegion("replay");
+        regionBack[1] = textureAtlas.findRegion("replay_press");
+        this.btnBack = new Button(regionBack,-0.4f,0.4f,0.1f,this);
         mainShip = new MainShip(textureAtlasGame,bulletPool,explosionPool,worldBounds,soundLaser);
         backgroundObj.setTrakingV(mainShip.getV());
         this.alientShipsPool = new AlientShipsPool(textureAtlasGame,mainShip,soundBallet);

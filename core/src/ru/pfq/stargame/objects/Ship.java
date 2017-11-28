@@ -32,7 +32,7 @@ public class Ship extends Sprite {
     protected  float reloadInterval;
     protected  float reloadTimer;
 
-    protected  float reloadIntervalDamage = 1f;
+    protected  float reloadIntervalDamage = 0.5f;
     protected  float reloadTimerDamage = 0f;
 
     protected Sound bulletSound;

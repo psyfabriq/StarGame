@@ -12,8 +12,8 @@ public class StarGame extends Game{
 	@Override
 	public void create() {
 		backgroundObj.setTextureBackground("bg.png");
-		backgroundObj.setTextureAtlas("packImages.pack");
-		backgroundObj.setAtlasRegions("star0","star1","star2","star3");
+		backgroundObj.setTextureAtlas("packButtons.pack");
+		backgroundObj.setAtlasRegions("star");
 		backgroundObj.initStars(BackgroundForAllScreens.STAR_COUNT);
 		setScreen(new MenuScreen(this));
 	}
