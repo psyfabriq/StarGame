@@ -30,6 +30,10 @@ public class MainShip extends Ship  {
     private final Vector2 v = new Vector2();
 
     private int frags;
+    private int level;
+
+    protected  int reloadIntervalLevelUp = 10;
+    protected  int reloadTimerLevelUp = 0;
 
 
 
@@ -63,6 +67,7 @@ public class MainShip extends Ship  {
         this.reloadInterval = 0.2f;
         hp = 100;
         frags = 0;
+        level = 1;
         flushDestroy();
     }
 
@@ -202,6 +207,22 @@ public class MainShip extends Ship  {
 
     public void setFrags(int frags) {
         this.frags += frags;
+        this.reloadTimerLevelUp += frags;
+        if(reloadTimerLevelUp >= reloadIntervalLevelUp){
+            reloadTimerLevelUp = 0;
+            reloadIntervalLevelUp += reloadIntervalLevelUp/2;
+            level += 1;
+            hp += 10;
+        }
+
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void upLevel() {
+        this.level += 1;
     }
 
     private void stop(){

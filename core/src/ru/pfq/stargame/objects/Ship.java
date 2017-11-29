@@ -92,19 +92,23 @@ public class Ship extends Sprite {
         v.set(v0).rotate(180);
     }
 
+    public  void killed(){ destroy();}
+
     public Rect getWorldBounds() {
         return worldBounds;
     }
 
-    public void setHP(int hp){
+    public void downHP(int hp){
         if(this.hp<=0 && !this.isDestroyed){
-            System.out.println("Game Over");
             Explosion expo =  explosionPool.obtain();
             expo.set(getHeight(),pos);
-            this.destroy();
+            this.killed();
         }else if(!this.isDestroyed){
-                this.hp -= hp;
-                System.out.println(this.hp);
+                if(this.hp >= hp) {
+                    this.hp -= hp;
+                }else{
+                    this.hp = 0;
+                }
                 frame = 1;
         }
     }

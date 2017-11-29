@@ -42,7 +42,7 @@ public class AlientShipsPool extends SpritesPool<AlientShip> {
         explosionPool = new ExplosionPool(atlas);
         bulletPool = new BulletPool(mainShip);
         this.mainShip = mainShip;
-        this.enemyEmitter = new EnemyEmitter(this,worldBounds,atlas,bulletSound);
+        this.enemyEmitter = new EnemyEmitter(this,worldBounds,atlas,bulletSound,mainShip);
     }
 
     public List<AlientShip> getActiveShips(){
@@ -107,7 +107,7 @@ public class AlientShipsPool extends SpritesPool<AlientShip> {
         while (objectIterator.hasNext()) {
             AlientShip sprite = objectIterator.next();
             if (!sprite.isDestroyed()&& Sprite.checkCollision(sprite,mainShip)) {
-                mainShip.setHP(10);
+                mainShip.downHP(10);
             }
         }
     }

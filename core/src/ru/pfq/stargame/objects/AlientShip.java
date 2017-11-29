@@ -65,6 +65,7 @@ public class AlientShip extends Ship {
 
 
 
+
     }
 
     @Override
@@ -123,10 +124,16 @@ public class AlientShip extends Ship {
     }
 
     @Override
+    public void killed(){
+
+            destroy();
+            mainShip.setFrags(1);
+    }
+
+    @Override
     public void destroy() {
-        //isBoss = false;
-        mainShip.setFrags(1);
         super.destroy();
+
     }
 
 

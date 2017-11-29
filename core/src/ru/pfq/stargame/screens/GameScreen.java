@@ -41,7 +41,7 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
 
     private MessageGameOver messageGameOver;
     private ButtonNewGame buttonNewGame;
-    private Button btnNewGame;
+  //  private Button btnNewGame;
 
     private enum State { PLAYING, GAME_OVER }
 
@@ -98,7 +98,9 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
     @Override
     public void render(float delta) {
         update(delta);
-        checkCollisions();
+        if(state == State.PLAYING) {
+            checkCollisions();
+        }
         deleteAllDestoyed();
         draw();
 
@@ -176,7 +178,8 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
     public void printInfo(){
         sbFrags.setLength(0);
         sbFrags.append("Frags: ").append(mainShip.getFrags()).append(" ");
-        sbFrags.append("HP: ").append(mainShip.getHp());
+        sbFrags.append("HP: ").append(mainShip.getHp()).append(" ");
+        sbFrags.append("Level: ").append(mainShip.getLevel());
         font.draw(batch,sbFrags.toString(),worldBounds.getLeft(),worldBounds.getTop());
 
     }
@@ -195,20 +198,30 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
 
     @Override
     protected void touchDown(Vector2 touch, int pointer) {
+        switch (state){
+            case PLAYING:
+                btnBack.touchDown(touch,pointer);
+                mainShip.touchDown(touch,pointer);
+                break;
+            case GAME_OVER:
+                buttonNewGame.touchDown(touch,pointer);
+                break;
 
-        btnBack.touchDown(touch,pointer);
-        mainShip.touchDown(touch,pointer);
-        buttonNewGame.touchDown(touch,pointer);
-
+        }
 
     }
 
     @Override
     protected void touchUp(Vector2 touch, int pointer) {
-
-        btnBack.touchUp(touch,pointer);
-        mainShip.touchUp(touch,pointer);
-        buttonNewGame.touchUp(touch,pointer);
+        switch (state) {
+            case PLAYING:
+                btnBack.touchUp(touch, pointer);
+                mainShip.touchUp(touch, pointer);
+            break;
+            case GAME_OVER:
+                buttonNewGame.touchUp(touch, pointer);
+            break;
+        }
     }
 
     @Override
@@ -227,12 +240,12 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
 
     @Override
     public boolean keyDown(int keycode) {
-        return mainShip.keyDown(keycode);
+        return (state == State.PLAYING)?mainShip.keyDown(keycode):false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        return mainShip.keyUp(keycode);
+        return (state == State.PLAYING)?mainShip.keyUp(keycode):false;
     }
 
     private void startNewGame() {

@@ -10,6 +10,7 @@ import ru.pfq.stargame.engine.math.Rect;
 import ru.pfq.stargame.engine.math.Rnd;
 import ru.pfq.stargame.engine.utils.Regions;
 import ru.pfq.stargame.objects.AlientShip;
+import ru.pfq.stargame.objects.MainShip;
 
 public class EnemyEmitter {
 
@@ -38,8 +39,10 @@ public class EnemyEmitter {
     private final Rect worlBounds;
     private final Sound bulletSound;
 
-    private  float generateInteval = 2f;
+    private  float generateInteval = 3f;
     private  float generateTimer;
+
+    private  final MainShip mainShip;
 
     private final TextureRegion[] enemySmallRegion;
     private final TextureRegion[] enemyMediumRegion;
@@ -53,10 +56,11 @@ public class EnemyEmitter {
     private final AlientShipsPool enemyPool;
 
 
-    public EnemyEmitter(AlientShipsPool enemyPool, Rect worlBounds, TextureAtlas atlas, Sound bulletSound) {
+    public EnemyEmitter(AlientShipsPool enemyPool, Rect worlBounds, TextureAtlas atlas, Sound bulletSound, MainShip mainShip) {
         this.enemyPool   = enemyPool;
         this.worlBounds  = worlBounds;
         this.bulletSound = bulletSound;
+        this.mainShip = mainShip;
         this.bulletSound.setVolume(1,0.1f);
 
         TextureRegion region0 = atlas.findRegion("alien-scout");

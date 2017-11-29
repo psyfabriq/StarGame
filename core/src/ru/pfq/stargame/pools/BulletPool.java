@@ -1,16 +1,12 @@
 package ru.pfq.stargame.pools;
 
 import java.util.Arrays;
-import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 import ru.pfq.stargame.engine.pool.SpritesPool;
 import ru.pfq.stargame.objects.Bullet;
-import ru.pfq.stargame.objects.Explosion;
 import ru.pfq.stargame.objects.Ship;
 import ru.pfq.stargame.sprite.Sprite;
 
@@ -58,7 +54,7 @@ public class BulletPool extends SpritesPool<Bullet> {
                 if(Sprite.checkCollision(activeObjects.get(i),sprite)){
                     if(sprite.frame == 0){
                         activeObjects.get(i).setShip(sprite);
-                        sprite.setHP(activeObjects.get(i).getDamage());
+                        sprite.downHP(activeObjects.get(i).getDamage());
                         if(sprite.isDestroyed()){
                             objectIterator.remove();
                         }

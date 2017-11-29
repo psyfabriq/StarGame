@@ -18,7 +18,7 @@ public class ExplosionPool extends SpritesPool<Explosion> {
 
     @Override
     protected Explosion newObject() {
-        return new Explosion(explosionRegion ,9,9,74);
+        return new Explosion(explosionRegion ,5,4,20);
     }
 
     @Override
