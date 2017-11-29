@@ -60,21 +60,11 @@ public class BulletPool extends SpritesPool<Bullet> {
                         activeObjects.get(i).setShip(sprite);
                         sprite.setHP(activeObjects.get(i).getDamage());
                         if(sprite.isDestroyed()){
-                            //listShips.remove(sprite);
-                            System.out.println(
-                                    "dgdfgdfgdfgdfgdfgdfg"
-                            );
+                            objectIterator.remove();
                         }
                     }
                     activeObjects.get(i).destroy();
                 }
-                /*
-                reloadTimer += delta;
-                if(reloadTimer>= reloadInterval){
-                    reloadTimer = 0f;
-                    sprite.frame = 0;
-                }
-                */
             }
         }
 
