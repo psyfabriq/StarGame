@@ -125,6 +125,7 @@ public class AlientShip extends Ship {
     @Override
     public void destroy() {
         //isBoss = false;
+        mainShip.setFrags(1);
         super.destroy();
     }
 

@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import ru.pfq.stargame.actions.ButtonActionListener;
 import ru.pfq.stargame.engine.Base2DScreen;
 import ru.pfq.stargame.engine.math.Rect;
+import ru.pfq.stargame.engine.utils.Font;
 import ru.pfq.stargame.objects.CoreBackground;
 import ru.pfq.stargame.objects.Button;
 import ru.pfq.stargame.objects.MainShip;
@@ -23,7 +24,7 @@ import ru.pfq.stargame.pools.AlientShipsPool;
 
 public class GameScreen extends Base2DScreen implements ButtonActionListener {
 
-
+    private static final float FONT_SIZE = 0.02f;
 
     private TextureAtlas textureAtlas;
     private TextureAtlas textureAtlasGame;
@@ -34,7 +35,8 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
     private Sound soundLaser;
     private Sound soundBallet;
     private Sound soundExplosion;
-    private int frags;
+
+    private StringBuilder sbFrags = new StringBuilder();
 
 
     private MessageGameOver messageGameOver;
@@ -50,6 +52,8 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
     private  final BulletPool bulletPool;
     private  ExplosionPool explosionPool;
     private AlientShipsPool alientShipsPool;
+
+    private Font font;
 
 
     public GameScreen(Game game) {
@@ -84,6 +88,9 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
         music.play();
         this.messageGameOver = new MessageGameOver(textureAtlasGame);
         this.buttonNewGame = new ButtonNewGame(textureAtlasGame,this);
+        this.font = new Font("font.fnt","font.png");
+        this.font.setWorldSize(FONT_SIZE);
+
         startNewGame();
 
     }
@@ -157,12 +164,21 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
         alientShipsPool.drawActiveObjects(batch);
         bulletPool.drawActiveObjects(batch);
         explosionPool.drawActiveObjects(batch);
-        btnBack.draw(batch);
+       // btnBack.draw(batch);
         if (state == State.GAME_OVER) {
             messageGameOver.draw(batch);
             buttonNewGame.draw(batch);
         }
+        printInfo();
         batch.end();
+    }
+
+    public void printInfo(){
+        sbFrags.setLength(0);
+        sbFrags.append("Frags: ").append(mainShip.getFrags()).append(" ");
+        sbFrags.append("HP: ").append(mainShip.getHp());
+        font.draw(batch,sbFrags.toString(),worldBounds.getLeft(),worldBounds.getTop());
+
     }
 
     @Override
@@ -174,6 +190,7 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
         alientShipsPool.dispose();
         music.dispose();
         super.dispose();
+        font.dispose();
     }
 
     @Override
@@ -221,7 +238,7 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
     private void startNewGame() {
         System.out.println("startNewGame");
         state = State.PLAYING;
-        frags = 0;
+        //frags = 0;
         mainShip.setToNewGame();
         bulletPool.freeAllActiveObjects();
         alientShipsPool.freeAllActiveObjects();

@@ -29,6 +29,8 @@ public class MainShip extends Ship  {
     private final Vector2 v0 = new Vector2(0.5f,0.0f);
     private final Vector2 v = new Vector2();
 
+    private int frags;
+
 
 
 
@@ -60,6 +62,7 @@ public class MainShip extends Ship  {
         this.bulletDamage = 1;
         this.reloadInterval = 0.2f;
         hp = 100;
+        frags = 0;
         flushDestroy();
     }
 
@@ -193,7 +196,13 @@ public class MainShip extends Ship  {
         }
     }
 
+    public int getFrags() {
+        return frags;
+    }
 
+    public void setFrags(int frags) {
+        this.frags += frags;
+    }
 
     private void stop(){
         v.setZero();

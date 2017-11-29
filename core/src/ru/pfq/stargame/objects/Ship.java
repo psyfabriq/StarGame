@@ -100,12 +100,16 @@ public class Ship extends Sprite {
         if(this.hp<=0 && !this.isDestroyed){
             System.out.println("Game Over");
             Explosion expo =  explosionPool.obtain();
-            expo.set(0.1f,pos);
+            expo.set(getHeight(),pos);
             this.destroy();
         }else if(!this.isDestroyed){
                 this.hp -= hp;
                 System.out.println(this.hp);
                 frame = 1;
         }
+    }
+
+    public int getHp() {
+        return hp;
     }
 }
