@@ -1,0 +1,136 @@
+
+gameTextures.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+explosion
+  rotate: false
+  xy: 1, 107
+  size: 912, 895
+  orig: 912, 895
+  offset: 0, 0
+  index: -1
+main_ship1
+  rotate: false
+  xy: 1, 1
+  size: 336, 104
+  orig: 336, 104
+  offset: 0, 0
+  index: 2
+main_ship2
+  rotate: false
+  xy: 339, 3
+  size: 340, 102
+  orig: 340, 102
+  offset: 0, 0
+  index: 1
+engine
+  rotate: false
+  xy: 681, 14
+  size: 224, 91
+  orig: 224, 91
+  offset: 0, 0
+  index: 3
+bullet_strip_red_laser
+  rotate: false
+  xy: 907, 58
+  size: 36, 47
+  orig: 36, 47
+  offset: 0, 0
+  index: -1
+bullet_strip_elloy
+  rotate: false
+  xy: 907, 28
+  size: 24, 28
+  orig: 24, 28
+  offset: 0, 0
+  index: -1
+bullet_strip_blue
+  rotate: false
+  xy: 933, 29
+  size: 25, 27
+  orig: 25, 27
+  offset: 0, 0
+  index: -1
+bullet_strip_green
+  rotate: false
+  xy: 933, 3
+  size: 26, 24
+  orig: 26, 24
+  offset: 0, 0
+  index: -1
+
+gameTextures2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+alien-mothership
+  rotate: false
+  xy: 1, 485
+  size: 692, 512
+  orig: 692, 512
+  offset: 0, 0
+  index: -1
+main_ship3
+  rotate: false
+  xy: 1, 235
+  size: 364, 248
+  orig: 364, 248
+  offset: 0, 0
+  index: 4
+main_ship4
+  rotate: false
+  xy: 1, 1
+  size: 364, 232
+  orig: 364, 232
+  offset: 0, 0
+  index: 3
+alien-battlecruiser
+  rotate: false
+  xy: 695, 741
+  size: 320, 256
+  orig: 320, 256
+  offset: 0, 0
+  index: -1
+alien-destroyer
+  rotate: false
+  xy: 367, 227
+  size: 240, 256
+  orig: 240, 256
+  offset: 0, 0
+  index: -1
+engine
+  rotate: false
+  xy: 367, 97
+  size: 348, 128
+  orig: 348, 128
+  offset: 0, 0
+  index: 1
+gameover
+  rotate: false
+  xy: 367, 3
+  size: 502, 92
+  orig: 502, 92
+  offset: 0, 0
+  index: -1
+engine
+  rotate: false
+  xy: 695, 675
+  size: 272, 64
+  orig: 272, 64
+  offset: 0, 0
+  index: 2
+alien-scout
+  rotate: false
+  xy: 695, 545
+  size: 170, 128
+  orig: 170, 128
+  offset: 0, 0
+  index: -1
+new_game
+  rotate: false
+  xy: 609, 414
+  size: 378, 69
+  orig: 378, 69
+  offset: 0, 0
+  index: -1

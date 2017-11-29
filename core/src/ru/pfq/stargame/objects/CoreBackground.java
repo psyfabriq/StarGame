@@ -14,8 +14,8 @@ import ru.pfq.stargame.engine.math.Rect;
 import ru.pfq.stargame.engine.math.Rnd;
 import ru.pfq.stargame.engine.utils.Regions;
 
-public class BackgroundForAllScreens {
-    private static BackgroundForAllScreens instance;
+public class CoreBackground {
+    private static CoreBackground instance;
     public static final int STAR_COUNT = 500;
 
     private int start_count = 200;
@@ -25,11 +25,11 @@ public class BackgroundForAllScreens {
     private TextureRegion[] regionStar;
     private List<Star> stars = new ArrayList<Star>();
 
-    private BackgroundForAllScreens() {
+    private CoreBackground() {
     }
 
-    public static BackgroundForAllScreens getInstance(){
-        if(instance == null) instance = new BackgroundForAllScreens();
+    public static CoreBackground getInstance(){
+        if(instance == null) instance = new CoreBackground();
         return instance;
     }
 

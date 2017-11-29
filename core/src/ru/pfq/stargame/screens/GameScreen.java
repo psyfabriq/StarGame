@@ -5,9 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -15,7 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import ru.pfq.stargame.actions.ButtonActionListener;
 import ru.pfq.stargame.engine.Base2DScreen;
 import ru.pfq.stargame.engine.math.Rect;
-import ru.pfq.stargame.objects.BackgroundForAllScreens;
+import ru.pfq.stargame.objects.CoreBackground;
 import ru.pfq.stargame.objects.Button;
 import ru.pfq.stargame.objects.MainShip;
 import ru.pfq.stargame.objects.Ship;
@@ -30,7 +28,7 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
     private TextureAtlas textureAtlas;
     private TextureAtlas textureAtlasGame;
     private Button btnBack;
-    private BackgroundForAllScreens backgroundObj = BackgroundForAllScreens.getInstance();
+    private CoreBackground backgroundObj = CoreBackground.getInstance();
     private Music music;
     private MainShip mainShip;
     private Sound soundLaser;
@@ -57,7 +55,7 @@ public class GameScreen extends Base2DScreen implements ButtonActionListener {
     public GameScreen(Game game) {
 
         super(game);
-        this.textureAtlasGame = new TextureAtlas("mainAtlas.tpack");
+        this.textureAtlasGame = new TextureAtlas("gameTextures.pack");
         this.explosionPool = new ExplosionPool(textureAtlasGame);
         this.bulletPool= new BulletPool();
     }

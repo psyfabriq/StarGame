@@ -20,7 +20,7 @@ public class ButtonNewGame extends Sprite {
 
 
     public ButtonNewGame(TextureAtlas atlas, ButtonActionListener actionListener) {
-        super(atlas.findRegion("button_new_game"));
+        super(atlas.findRegion("new_game"));
         setWithProportion(WIDTH);
         setBottom(BOTTOM_MARGIN);
         this.actionListener = actionListener;

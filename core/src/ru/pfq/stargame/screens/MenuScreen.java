@@ -2,7 +2,6 @@ package ru.pfq.stargame.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -10,14 +9,9 @@ import com.badlogic.gdx.math.Vector2;
 
 import ru.pfq.stargame.actions.ButtonActionListener;
 import ru.pfq.stargame.engine.Base2DScreen;
-import ru.pfq.stargame.engine.Sprite2DTexture;
 import ru.pfq.stargame.engine.math.Rect;
-import ru.pfq.stargame.engine.math.Rnd;
-import ru.pfq.stargame.objects.Background;
-import ru.pfq.stargame.objects.BackgroundForAllScreens;
+import ru.pfq.stargame.objects.CoreBackground;
 import ru.pfq.stargame.objects.Button;
-import ru.pfq.stargame.objects.Star;
-
 
 
 public class MenuScreen extends Base2DScreen implements ButtonActionListener {
@@ -26,7 +20,7 @@ public class MenuScreen extends Base2DScreen implements ButtonActionListener {
     private Button btnExit;
     private TextureAtlas textureAtlas;
 
-    BackgroundForAllScreens backgroundObj = BackgroundForAllScreens.getInstance();
+    CoreBackground backgroundObj = CoreBackground.getInstance();
 
     public MenuScreen(Game game) {
         super(game);

@@ -45,9 +45,9 @@ public class MainShip extends Ship  {
     private ArrayList<TouchInfo> touches = new ArrayList<TouchInfo>();
 
     public MainShip(TextureAtlas atlas, BulletPool bulletPool, ExplosionPool explosionPool, Rect worldBounds,Sound bulletSound) {
-        super(atlas.findRegion("main_ship"),1,2,2,bulletPool,explosionPool,worldBounds);
+        super(atlas.findRegion("main_ship3"),1,2,2,bulletPool,explosionPool,worldBounds);
         setHeightProportion(SHIP_HEIGHT);
-        this.bulletRegion = atlas.findRegion("bulletMainShip");
+        this.bulletRegion = atlas.findRegion("bullet_strip_green");
         super.bulletSound = bulletSound;
         super.bulletSound.setVolume(1,0.05f);
         setToNewGame();
@@ -55,7 +55,7 @@ public class MainShip extends Ship  {
 
     public void setToNewGame() {
         pos.x = worldBounds.pos.x;
-        this.bulletHeight = 0.01f;
+        this.bulletHeight = 0.015f;
         this.bulletV.set(0, 0.5f);
         this.bulletDamage = 1;
         this.reloadInterval = 0.2f;
