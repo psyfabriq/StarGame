@@ -35,7 +35,7 @@ public class EnemyEmitter {
     private static final float ENEMY_BIG_RELOAD_INTERVAL = 1f;
     private static final int   ENEMY_BIG_HP = 10;
 
-
+    private int   stage = 0;
     private final Rect worlBounds;
     private final Sound bulletSound;
 
@@ -74,7 +74,11 @@ public class EnemyEmitter {
         this.bulletRegion = atlas.findRegion("bullet_strip_red_laser");
     }
 
+
+
     public void generateEnemies(float deltatime){
+        stage = mainShip.getLevel();
+        float st = (stage-stage*0.1f);
         generateTimer+=deltatime;
         if(generateTimer >=generateInteval){
             generateTimer = 0f;
@@ -85,13 +89,13 @@ public class EnemyEmitter {
                 enemyV.set(Rnd.nextFloat(-0.09f, 0.09f), Rnd.nextFloat(-0.1f, -0.3f));
                 enemy.set(enemySmallRegion,
                         enemyV,bulletRegion,
-                        ENEMY_SMALL_BULLET_HEIGHT,
+                        ENEMY_SMALL_BULLET_HEIGHT*st,
                         ENEMY_SMALL_BULLET_VY,
-                        ENEMY_SMALL_BULLET_DAMEGE,
+                        ENEMY_SMALL_BULLET_DAMEGE * stage,
                         ENEMY_SMALL_RELOAD_INTERVAL,
                         this.bulletSound,
                         ENEMY_SMALL_HEIGHT,
-                        ENEMY_SMALL_HP,
+                        ENEMY_SMALL_HP * stage,
                         false);
 
             }else if(type<0.9f){
@@ -99,13 +103,13 @@ public class EnemyEmitter {
                 enemyV.set(Rnd.nextFloat(-0.09f, 0.09f), Rnd.nextFloat(-0.04f, -0.08f));
                 enemy.set(enemyMediumRegion,
                         enemyV,bulletRegion,
-                        ENEMY_MEDIUM_BULLET_HEIGHT,
+                        ENEMY_MEDIUM_BULLET_HEIGHT*st,
                         ENEMY_MEDIUM_BULLET_VY,
-                        ENEMY_MEDIUM_BULLET_DAMEGE,
+                        ENEMY_MEDIUM_BULLET_DAMEGE * stage,
                         ENEMY_MEDIUM_RELOAD_INTERVAL,
                         this.bulletSound,
                         ENEMY_MEDIUM_HEIGHT,
-                        ENEMY_MEDIUM_HP,
+                        ENEMY_MEDIUM_HP * stage,
                         false);
             }else if(!enemyPool.hasBossOnTheScreen){
                 AlientShip enemy = enemyPool.obtain();
@@ -113,13 +117,13 @@ public class EnemyEmitter {
                 enemyV.set(Rnd.nextFloat(-0.04f, 0.04f), Rnd.nextFloat(-0.002f, -0.01f));
                 enemy.set(enemyBigRegion,
                         enemyV,bulletRegion,
-                        ENEMY_BIG_BULLET_HEIGHT,
+                        ENEMY_BIG_BULLET_HEIGHT*st,
                         ENEMY_BIG_BULLET_VY,
-                        ENEMY_BIG_BULLET_DAMEGE,
+                        ENEMY_BIG_BULLET_DAMEGE * stage,
                         ENEMY_BIG_RELOAD_INTERVAL,
                         this.bulletSound,
                         ENEMY_BIG_HEIGHT,
-                        ENEMY_BIG_HP,
+                        ENEMY_BIG_HP * stage,
                         true);
             }
 
